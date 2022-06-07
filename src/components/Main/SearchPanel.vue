@@ -3,6 +3,7 @@ import { ref, onMounted, nextTick } from 'vue';
 import throttle from 'lodash.throttle'
 import { useUXStore } from '@/stores/ux'
 import SearchIcon from './SearchIcon'
+import XIcon from './XIcon'
 import { getBackendStatus, initlizeClipboardAccess } from './SearchPanelUtils'
 import { cache } from '@/utils/api'
 
@@ -135,6 +136,10 @@ function DownloadBeatmap(type, id) {
     })
 }
 
+function cleanInput() {
+  searchInput.value = ''
+  inputElement.value.focus()
+}
 </script>
 
 <template>
@@ -151,6 +156,11 @@ function DownloadBeatmap(type, id) {
           :disabled="disabled"
           type="text"
           placeholder="在此输入链接或者谱面sid" />
+        <XIcon
+          v-show="searchInput.length !== 0"
+          @mousedown.prevent="cleanInput"
+          size="1.2em"
+          color="#fff" />
       </label>
       <button
       :disabled="disabled"
@@ -207,7 +217,7 @@ function DownloadBeatmap(type, id) {
   display: flex;
   align-items: center;
 
-  padding: 0 1em;
+  padding: 0 0.5em 0 1em;
   height: var(--height);
   flex: 1 0.5;
 
