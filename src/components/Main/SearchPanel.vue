@@ -13,12 +13,12 @@ const searchInput = ref('')
 const feedback = ref('')
 
 onMounted(() => {
-  getBackendStatus(inputElement, disabled)
+  getBackendStatus(disabled)
     .then(() => {
       // 如果我想 focus，得先让 input 能用
       nextTick(() => {
         inputElement.value.focus()
-        initlizeClipboardAccess(searchInput)
+        initlizeClipboardAccess(searchInput, disabled)
       })
     })
 })

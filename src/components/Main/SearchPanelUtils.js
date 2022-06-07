@@ -1,9 +1,10 @@
 import { time } from '@/utils/api'
 
 // 读取剪切板
-function readClipboard (searchInput) {
+function readClipboard (searchInput, disabled) {
   window.navigator.clipboard.readText()
     .then((content) => {
+      if (disabled.value === true) return
       searchInput.value = content
       console.log(`[read-clipboard]: 完成自动填充 "${content}" 夸我！`)
     })
@@ -12,14 +13,14 @@ function readClipboard (searchInput) {
     })
 }
 
-export function initlizeClipboardAccess (searchInput) {
+export function initlizeClipboardAccess (searchInput, disabled) {
   // 读取剪切板
   if ('readText' in window.navigator.clipboard) {
-    readClipboard(searchInput)
+    readClipboard(searchInput, disabled)
 
     // 网页获得焦点时自动填充
     window.addEventListener('focus', () => {
-      readClipboard(searchInput)
+      readClipboard(searchInput, disabled)
     })
   } else {
     console.log('该浏览器无法使用 Clipboard API: readText()')
@@ -27,7 +28,7 @@ export function initlizeClipboardAccess (searchInput) {
 }
 
 // 获取后端状态
-export async function getBackendStatus (inputElement, disabled) {
+export async function getBackendStatus (disabled) {
   try {
     const response = await time()
     console.log('[getBackendStatus]: 获取 API 状态 ...')
