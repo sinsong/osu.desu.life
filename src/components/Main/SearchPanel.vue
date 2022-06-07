@@ -78,10 +78,13 @@ function handleSearch() {
   }
 
   // 纯数字的情况
-  let match = null
-  if (match = rePureId.test(input)) {
+  if (rePureId.test(input)) {
     return DownloadBeatmap('s', input)
   }
+
+  doFeedback('请输入谱面 id 或者谱面链接')
+  doFeedback('')
+  searchInput.value = ''
 }
 
 function DownloadBeatmap(type, id) {
@@ -139,6 +142,7 @@ function DownloadBeatmap(type, id) {
 function cleanInput() {
   searchInput.value = ''
   inputElement.value.focus()
+  feedback.value = ''
 }
 </script>
 
