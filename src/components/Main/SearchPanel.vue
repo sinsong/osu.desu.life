@@ -15,7 +15,7 @@ const feedback = ref('')
 onMounted(() => {
   getBackendStatus(inputElement, disabled)
     .then(() => {
-      // 如果我想 focus，得想让 input 能用
+      // 如果我想 focus，得先让 input 能用
       nextTick(() => {
         inputElement.value.focus()
         initlizeClipboardAccess(searchInput)
@@ -96,7 +96,7 @@ function DownloadBeatmap(type, id) {
       return
   }
 
-  // 正在获取铺面信息
+  // 正在获取谱面信息
   // 正在缓存谱面
 
   // Necro Fantasia 516494

@@ -1,6 +1,6 @@
 # desu.life 的 osu! 镜像站
 
-> https://osu.defu.life
+> https://osu.desu.life
 
 ## 特性
 
