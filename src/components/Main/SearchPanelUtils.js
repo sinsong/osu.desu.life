@@ -23,7 +23,7 @@ export function initlizeClipboardAccess (searchInput, disabled) {
       readClipboard(searchInput, disabled)
     })
   } else {
-    console.log('该浏览器无法使用 Clipboard API: readText()')
+    console.log('[read-clipboard]: 该浏览器无法使用 Clipboard API: readText()')
   }
 }
 

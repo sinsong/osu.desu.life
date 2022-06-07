@@ -1,10 +1,16 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted } from 'vue'
 import { useUXStore } from '@/stores/ux'
 import Main from '@/components/Main/Main.vue'
 
 const uxStore = useUXStore()
 
+onMounted(() => {
+  console.log('[app]: %cliteral%c 重写的镜像页 | 反馈 https://github.com/sinsong/osu.desu.life/issues',
+    'color:#6495ed',
+    ''
+  )
+})
 </script>
 
 <template>
