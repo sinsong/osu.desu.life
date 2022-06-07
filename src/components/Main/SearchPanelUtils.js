@@ -44,6 +44,6 @@ export async function getBackendStatus (inputElement, disabled) {
   } catch (err) {
     console.log('[getBackendStatus]: 获取失败，API 状态异常')
     disabled.value = true
-    console.log(err)
+    console.debug(`[getBackendStatus]: ${err.name} "${err.message}"`)
   }
 }

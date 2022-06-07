@@ -24,31 +24,40 @@ onMounted(() => {
 })
 
 // 处理搜索
-let reURLBeatmapSets = /^\/beatmapsets\/(?<sid>\d+)$/
-let reURLShort = /^\/(?<type>\w+)\/(?<id>\d+)$/
+
+/*
+ * 对于 osu! 的谱面链接来说
+ * https://osu.ppy.sh/b/1097543                      来自 osu! 客户端
+ * https://osu.ppy.sh/s/516494                       来自 osu! 客户端
+ * https://osu.ppy.sh/beatmaps/1097543?mode=osu      个人页面分数链接
+ * https://osu.ppy.sh/beatmapsets/516494#osu/1097543 谱面信息页面
+ * (是 MISATO - Necro Fantasia 不用好奇了)
+ * 
+ * 那么答案只有一个！使用模式：/:type/:id
+ * :type 可以是:
+ *   "beatmapsets" -> sid
+ *   "beatmaps"    -> bid
+ *   "s" -> sid
+ *   "b" -> bid
+ * :id 依据 :type 确定是 bid 还是 sid
+ */
+let reOsuPathname = /^\/(?<type>\w+)\/(?<id>\d+)$/
 let rePureId = /^\d+$/
 function handleSearch() {
   let input = searchInput.value
 
   // URL 的情况
   try {
+    // 尝试解析 URL
     let inputURL = new URL(input)
-
-    if (inputURL.hostname !== 'osu.ppy.sh') {
-      return
-    }
-
+    // 限制域名
+    if (inputURL.hostname !== 'osu.ppy.sh') { return }
+    // 取出路径
     let pathname = inputURL.pathname
-    let match = null
 
-    // /beatmapsets/:sid
-    if ((match = reURLBeatmapSets.exec(pathname)) !== null) {
-      let { sid } = match.groups
-      return DownloadBeatmap('s', sid);
-    }
-    
-    // /:type/:id
-    if ((match = reURLShort.exec(pathname)) !== null) {
+    // 进行匹配
+    let match = null
+    if ((match = reOsuPathname.exec(pathname)) !== null) {
       let { type, id } = match.groups
       return DownloadBeatmap(type, id)
     }
@@ -75,9 +84,11 @@ function DownloadBeatmap(type, id) {
 
   // 参数检查
   switch(type) {
+    case 'beatmapsets':
     case 's':
       request.beatmapsetid = id
       break;
+    case 'beatmaps':
     case 'b':
       request.beatmapid = id
       break;
