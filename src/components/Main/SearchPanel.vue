@@ -156,11 +156,13 @@ function cleanInput() {
           :disabled="disabled"
           type="text"
           placeholder="在此输入链接或者谱面sid" />
-        <XIcon
-          v-show="searchInput.length !== 0"
-          @mousedown.prevent="cleanInput"
-          size="1.2em"
-          color="#fff" />
+        <Transition name="clean">
+          <XIcon
+            v-show="searchInput.length !== 0"
+            @mousedown.prevent="cleanInput"
+            size="1.2em"
+            color="#fff" />
+        </Transition>
       </label>
       <button
       :disabled="disabled"
@@ -272,5 +274,18 @@ button {
   &:hover {
     filter: brightness(1.1);
   }
+}
+
+// 清除按钮
+.clean-enter-active,
+.clean-leave-active {
+  transition: opacity .125s ease, transform .125s ease;
+}
+
+.clean-enter-from,
+.clean-leave-to {
+  pointer-events: none;
+  transform: translate(100%, 0);
+  opacity: 0;
 }
 </style>
