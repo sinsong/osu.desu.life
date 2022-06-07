@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
+import throttle from 'lodash.throttle'
 import { useUXStore } from '@/stores/ux'
 import SearchIcon from './SearchIcon'
 import { getBackendStatus, initlizeClipboardAccess } from './SearchPanelUtils'
@@ -22,6 +23,11 @@ onMounted(() => {
       })
     })
 })
+
+// 使用节流函数降低更新频率
+const doFeedback = throttle((message) => {
+  feedback.value = message
+}, 1000)
 
 // 处理搜索
 
@@ -96,8 +102,8 @@ function DownloadBeatmap(type, id) {
       return
   }
 
-  // 正在获取谱面信息
-  // 正在缓存谱面
+  doFeedback('请求缓存谱面')
+  doFeedback('正在缓存谱面')
 
   // Necro Fantasia 516494
   cache(request)
@@ -109,22 +115,23 @@ function DownloadBeatmap(type, id) {
         case 200:
         case 201:
           desulifeURL.pathname = res.message.replaceAll('\\', '/')
+          doFeedback('缓存成功！开始下载谱面')
           window.location.assign(desulifeURL.href)
           break;
         case 202:
-          // 已经在缓存
+          doFeedback('谱面已被缓存')
           console.debug(response)
           break;
         case 403:
-          // 获取谱面失败
+          doFeedback('获取谱面失败')
           break;
         default:
-          // 未知错误
+          doFeedback('未知错误')
           break;
       }
     })
     .catch(() => {
-      // 缓存谱面超时，稍后再试
+      doFeedback('缓存谱面失败，请稍后再试')
     })
 }
 
@@ -150,13 +157,27 @@ function DownloadBeatmap(type, id) {
         @click="handleSearch"
       >下载</button>
     </div>
-    <p> {{ feedback }} </p>
+    <div class="feedback-anchor">
+      <p> {{ feedback }} </p>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .search-panel {
   display: flex;
+  flex-direction: column;
+}
+
+// 使用 anchor 定位，绝对定位再移除流
+// 应该不会对输入空间居中产生影响
+.feedback-anchor {
+  position: relative;
+  p {
+    position: absolute;
+    margin-top: 0.5em;
+    padding: 0 1em;
+  }
 }
 
 // 表单组
