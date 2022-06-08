@@ -10,6 +10,7 @@ onMounted(() => {
     'color:#6495ed',
     ''
   )
+  console.log(`[app]: commit ${__COMMIT_INFO__}`)
 })
 </script>
 
