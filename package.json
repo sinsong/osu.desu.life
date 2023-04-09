@@ -9,19 +9,19 @@
     "lint": "eslint src build"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.3.5",
     "feather-icons": "^4.29.0",
     "lodash.throttle": "^4.1.1",
-    "pinia": "^2.0.14",
-    "vue": "^3.2.25"
+    "pinia": "^2.0.34",
+    "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
-    "eslint": "^8.17.0",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "eslint": "^8.38.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-vue": "^9.1.0",
-    "sass": "^1.52.2",
+    "eslint-plugin-vue": "^9.10.0",
+    "sass": "^1.61.0",
     "standard": "^17.0.0",
-    "vite": "^2.9.9"
+    "vite": "^4.2.1"
   }
 }
