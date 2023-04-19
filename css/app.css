@@ -15,7 +15,7 @@ main {
 }
 
 footer {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--footer-color);
 
   display: flex;
   flex-direction: column;
