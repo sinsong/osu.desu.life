@@ -1,0 +1,50 @@
+body {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* layout */
+
+main {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+footer {
+  color: rgba(255, 255, 255, 0.72);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a {
+  color: rgba(100, 149, 237, 0.82);
+}
+
+
+/* input */
+
+#input {
+  appearance: none;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+
+  min-width: 50vw;
+  border: 1px solid #00ff00;
+  border-radius: 5px;
+  padding: 0.6em 0.8em;
+
+  background: transparent;
+
+  transition: outline-width .1s ease;
+}
+
+#input:focus{
+  outline: 5px solid hsla(115, 100%, 50%, 0.3);
+}

@@ -1,0 +1,14 @@
+:root {
+  color-scheme: light dark;
+
+  /* dark */
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}
