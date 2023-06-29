@@ -33,6 +33,10 @@ footer a:active {
 
 /* input */
 
+.input-box {
+  position: relative;
+}
+
 #input {
   appearance: none;
   font-size: 18px;
@@ -72,4 +76,42 @@ footer a:active {
 #input.error {
   border-color: #ff0000;
   outline-color: #ff00004d;
+}
+
+/* Success Check Animation */
+
+@keyframes animateCheck {
+  0% {
+    stroke-dashoffset: 80;
+    opacity: 100%;
+  }
+
+  25% {
+    stroke-dashoffset: 0;
+    opacity: 100%;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 100%;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0%;
+  }
+}
+
+#success-check {
+  position: absolute;
+  width: 3em;
+  left: calc(-1 * (3em + 15px));
+  aspect-ratio: 1;
+
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+}
+
+#success-check.animation {
+  animation: animateCheck .85s ease-in-out;
 }

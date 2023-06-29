@@ -2,6 +2,7 @@ import { requestBeatmap, DOWNLOAD_STATUS_ERROR, DOWNLOAD_STATUS_BUFFERED, DOWNLO
 import { id, tryParseOsuURL, initializeClipboardAccess, downloadURL } from "./utility.js"
 
 let el_input = id('input')
+let el_successCheck = id('success-check')
 
 function hint(type) {
   switch(type) {
@@ -23,6 +24,21 @@ function unhint() {
   el_input.classList.remove('buffering', 'error')
 }
 
+function successAnimation() {
+  el_input.animate([
+    { borderColor: '#6495ed', outlineColor: 'rgba(100, 149, 237, 0.3)', offset: 0.25 }
+  ], {
+    easing: 'ease',
+    duration: 2500
+  }).play()
+ 
+  el_successCheck.classList.add('animation')
+}
+
+el_successCheck.addEventListener('animationend', ()=>{
+  el_successCheck.classList.remove('animation')
+})
+
 function handleInput(input) {
   let urlResult = tryParseOsuURL(input)
   if (urlResult !== null) {
@@ -41,6 +57,7 @@ function handleInput(input) {
             break
           case DOWNLOAD_STATUS_BUFFERED:
             unhint()
+            successAnimation()
             el_input.value = ''
             downloadURL(res.url)
             break
