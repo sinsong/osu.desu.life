@@ -7,22 +7,20 @@ function hint(type) {
   switch(type) {
     case 'buffering':
       // 黄色指示正在缓存
-      el_input.style.borderColor = '#ffff00'
-      el_input.style.outlineColor = '#ffff004d'
+      el_input.classList.add('buffering')
       break;
     case 'error':
       // 红色指示出现错误
-      el_input.style.borderColor = '#ff0000'
-      el_input.style.outlineColor = '#ff00004d'
+      el_input.classList.add('error')
       break;
+    default:
+      console.error('hint(): unknown hint type')
   }
-  
 }
 
 // 清理指示
 function unhint() {
-  el_input.style.borderColor = ''
-  el_input.style.outlineColor = ''
+  el_input.classList.remove('buffering', 'error')
 }
 
 function handleInput(input) {

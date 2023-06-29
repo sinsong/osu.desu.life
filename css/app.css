@@ -48,3 +48,13 @@ footer a {
 #input:focus{
   outline: 5px solid hsla(115, 100%, 50%, 0.3);
 }
+
+#input .buffering {
+  border-color: #ffff00;
+  outline-color: #ffff004d;
+}
+
+#input .error {
+  border-color: #ff0000;
+  outline-color: #ff00004d;
+}
