@@ -52,12 +52,24 @@ footer a:active {
   outline: 6px solid hsla(115, 100%, 50%, 0.3);
 }
 
-#input .buffering {
-  border-color: #ffff00;
-  outline-color: #ffff004d;
+@keyframes progress {
+  100% {
+    background-position-x: 3em;
+  }
 }
 
-#input .error {
+#input.buffering {
+  border-color: #ffff00;
+  outline-color: #ffff004d;
+
+  /* https://getbootstrap.com/docs/5.3/components/progress/#animated-stripes */
+  background-color: #665b00;
+  background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+	background-size: 3em 3em;
+  animation: 1s linear infinite progress;
+}
+
+#input.error {
   border-color: #ff0000;
   outline-color: #ff00004d;
 }
