@@ -54,9 +54,10 @@ function handleInput(input) {
         console.error(`请求失败：${err}`)
       })
   }
-
-  // TODO: 真的有人觉得一定是 bid 吗？
-  hint('error')
+  else {
+    // TODO: 真的有人觉得一定是 bid 吗？
+    hint('error')
+  }
 }
 
 el_input.addEventListener('keypress', (ev) => {
